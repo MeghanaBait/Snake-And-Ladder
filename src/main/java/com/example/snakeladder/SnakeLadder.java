@@ -18,9 +18,7 @@ public class SnakeLadder extends Application {
     public static final int tileSize = 40, width = 10, height = 10;
     public static final int buttonLine = height*tileSize + 50, infoline = buttonLine - 30;
     private static Dice dice = new Dice();
-
     private boolean gameStarted = false, playerOneTurn  = false, playerTwoTurn = false;
-
     private Player playerOne, playerTwo;
     private Pane createContent(){
         Pane root = new Pane();
@@ -35,8 +33,8 @@ public class SnakeLadder extends Application {
             }
         }
 
-        Image img = new Image("C:\\Users\\Meghana\\IdeaProjects\\SnakeLadder\\src\\main\\img.png");
 
+        Image img = new Image("C:\\Users\\Meghana\\IdeaProjects\\SnakeLadder\\src\\main\\img.png");
         ImageView board = new ImageView();
         board.setImage(img);
         board.setFitHeight(height*tileSize);
@@ -57,7 +55,7 @@ public class SnakeLadder extends Application {
         //Info Display
         Label player1Label = new Label("Your Turn! P1");
         Label player2Label = new Label("Your Turn! P2");
-        Label diceLabel = new Label("Start the Game");
+        Label diceLabel = new Label("Start Game");
 
         player1Label.setTranslateY(infoline);
         player1Label.setTranslateX(20);
@@ -66,8 +64,8 @@ public class SnakeLadder extends Application {
         diceLabel.setTranslateY(infoline);
         diceLabel.setTranslateX(160);
 
-        playerOne = new Player(tileSize, Color.BLACK, "Megha");
-        playerTwo = new Player(tileSize-5, Color.WHITE, "Anu");
+        playerOne = new Player(tileSize-5, Color.WHITE, "Megha");
+        playerTwo = new Player(tileSize-5, Color.BLACK, "Anu");
 
         //Player Action
         player1Btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,14 +103,15 @@ public class SnakeLadder extends Application {
                         playerTwo.movePlayer(diceValue);
 
                         //disabling the current player
-                        playerOneTurn = true;
-                        player1Btn.setDisable(false);
-                        player1Label.setText("Your Turn" + playerOne.getName());
+                        playerTwoTurn = false;
+                        player2Btn.setDisable(true);
+                        player1Label.setText("Your Turn " + playerOne.getName());
 
                         //Enable other player
-                        playerTwoTurn = true;
-                        player2Btn.setDisable(false);
-                        player2Label.setText("");
+                        playerOneTurn = true;
+                        player1Btn.setDisable(false);
+                        player1Label.setText("");
+
                     }
                 }
             }
@@ -138,6 +137,8 @@ public class SnakeLadder extends Application {
                 playerOne.getCoin(), playerTwo.getCoin());
         return root;
     }
+
+
     @Override
     public void start(Stage stage) throws IOException {
         Scene scene = new Scene(createContent());

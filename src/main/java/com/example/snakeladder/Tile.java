@@ -8,8 +8,8 @@ public class Tile extends Rectangle{
     public Tile(int tileSize){
         setWidth(tileSize);
         setHeight(tileSize);
-        setFill(Color.AZURE);
-        setStroke(Color.BLACK);
+        setFill(Color.AZURE);// fill color
+        setStroke(Color.BLACK);// border
     }
 
 }
